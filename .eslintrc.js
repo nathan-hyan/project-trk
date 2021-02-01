@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'airbnb-base',
@@ -15,5 +16,9 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    'import/no-unresolved': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    'no-console': 0,
+  },
 };
