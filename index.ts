@@ -3,14 +3,16 @@ import morgan from 'morgan';
 
 import config from '@configs/server';
 import handleError from '@helpers/handleError';
+import '@configs/database';
 
 import Users from '@routes/users';
 
-express.urlencoded({ extended: false });
+console.clear();
 
 const app = express();
 const PORT = config.server.port;
 
+app.use(express.json());
 app.use(morgan('tiny'));
 app.use(handleError);
 
