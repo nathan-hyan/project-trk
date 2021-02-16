@@ -20,5 +20,6 @@ module.exports = {
     'import/no-unresolved': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'no-console': 0,
+    'import/extensions': 0,
   },
 };
