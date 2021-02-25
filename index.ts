@@ -8,6 +8,7 @@ import handleError from '@helpers/handleError';
 import '@configs/database';
 
 import Users from '@routes/Users';
+import Transacciones from '@routes/Transactions';
 
 console.clear();
 
@@ -40,6 +41,7 @@ app.use(
 );
 
 app.use('/api/v1/users', Users);
+app.use('/transacciones', Transacciones);
 
 app.listen(PORT, () => {
   console.log(`🦋 >> ${PORT}`);
