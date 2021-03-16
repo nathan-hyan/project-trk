@@ -1,10 +1,12 @@
-export interface Product {
-  _id: string;
+import { ObjectId, Document } from 'mongoose';
+
+export interface Product extends Document {
   name: string;
   price: number;
   stock: number;
   category: string;
-  image?: string;
+  image: string;
   barcode: string;
-  storeId: string;
+  storeBranch: string;
+  storeId: ObjectId;
 }

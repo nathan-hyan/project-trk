@@ -3,7 +3,7 @@ import { Store } from '@interfaces/store';
 
 // Types are for declaring privileges (0: super admin, 1: admin, 2: user)
 
-const StoreSchema: Schema = new Schema(
+const StoresSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     location: [{ type: String, required: true }],
@@ -13,4 +13,4 @@ const StoreSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-export default model<Store>('Store', StoreSchema);
+export default model<Store>('Stores', StoresSchema);

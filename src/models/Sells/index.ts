@@ -1,19 +1,20 @@
 import { model, Schema } from 'mongoose';
-import User from '@interfaces/users';
+import { Sells } from '@interfaces/sells';
 
 const SellsSchema: Schema = new Schema(
   {
     products: [
       {
-        item: Schema.Types.ObjectId,
+        item: { type: Schema.Types.ObjectId, ref: 'Products' },
         quantity: Number,
       },
     ],
     amount: Number,
-    userId: Schema.Types.ObjectId,
-    storeId: Schema.Types.ObjectId,
+    userId: { type: Schema.Types.ObjectId, ref: 'Users' },
+    storeId: { type: Schema.Types.ObjectId, ref: 'Stores' },
+    storeBranch: { type: String, required: true },
   },
   { timestamps: true },
 );
 
-export default model<User>('Sells', SellsSchema);
+export default model<Sells>('Sells', SellsSchema);
