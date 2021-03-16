@@ -3,11 +3,14 @@ import bcrypt from 'bcryptjs';
 import createError from '@helpers/createError';
 import _User from '@interfaces/users';
 import Users from '@models/Users';
+import { ObjectId } from 'mongoose';
+import { ErrorResponse } from '@interfaces/error';
 import { MESSAGES } from './constants';
 
 declare module 'express-session' {
   interface Session {
     isAuth: boolean;
+    storeId: ObjectId;
   }
 }
 
@@ -44,6 +47,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   return bcrypt.compare(password, userExist.password, (error, response) => {
     if (!error && response) {
       req.session.isAuth = true;
+      req.session.storeId = userExist.storeId;
       return res.status(200).json({ success: true });
     }
     return createError(next, MESSAGES.error, 401);
@@ -63,10 +67,18 @@ const deleteUser = (req: Request, res: Response) => {
   );
 };
 
-const editUser = (req: Request, res: Response) => {
-  Users.findOneAndUpdate({ _id: req.params.id }, req.body).then((response: Response) =>
-    res.send({ success: true, response }),
-  );
+const editUser = (req: Request, res: Response, next: NextFunction) => {
+  Users.findOneAndUpdate({ _id: req.params.id }, req.body)
+    .then((response: Response) => {
+      if (!response) {
+        createError(next, 'User not found', 404);
+      } else {
+        res.send({ success: true, response });
+      }
+    })
+    .catch((err: ErrorResponse) => {
+      createError(next, err.message, err.status);
+    });
 };
 
 export default {

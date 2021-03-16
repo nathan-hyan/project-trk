@@ -8,7 +8,8 @@ import handleError from '@helpers/handleError';
 import '@configs/database';
 
 import Users from '@routes/Users';
-import Transacciones from '@routes/Transactions';
+import Products from '@routes/Products';
+import Sells from '@routes/Sells';
 
 console.clear();
 
@@ -41,7 +42,8 @@ app.use(
 );
 
 app.use('/api/v1/users', Users);
-app.use('/transacciones', Transacciones);
+app.use('/api/v1/products', Products);
+app.use('/api/v1/sells', Sells);
 
 app.listen(PORT, () => {
   console.log(`🦋 >> ${PORT}`);
